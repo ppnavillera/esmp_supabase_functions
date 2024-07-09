@@ -11,23 +11,22 @@ const supabase = createClient(
 async function invokeFunction() {
   try {
     const { data, error } = await supabase.functions.invoke("esmp", {
-      body: {
-        query: {
-          filter: {
-            property: "Song",
-            title: {
-              contains: "Summer drive",
-            },
-          },
-        },
-      },
+      body: {},
     });
 
     if (error) {
       console.error("Error invoking function:", error);
     } else {
-      console.log("Function response data:", data);
+      // console.log("Function response data:", data);
       // 여기서 data를 원하는 대로 처리할 수 있습니다.
+
+      const songs = data.results.map((page) => {
+        console.log(page.properties.Link.url);
+        return {
+          name: page.properties.Song.title[0].text.content,
+          url: page.properties.Link.url,
+        };
+      });
     }
   } catch (err) {
     console.error("Unexpected error:", err);

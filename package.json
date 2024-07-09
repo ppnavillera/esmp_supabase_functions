@@ -14,5 +14,8 @@
     "@supabase/supabase-js": "^2.44.3",
     "dotenv": "^16.4.5",
     "supabase": "^1.178.2"
+  },
+  "dependencies": {
+    "axios": "^1.7.2"
   }
 }
